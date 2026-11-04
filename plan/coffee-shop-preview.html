@@ -4,16 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f0e8">
-  <title>慢焙日常｜留一點時間，給一杯好咖啡</title>
+  <title>PAJARO Coffee｜留一點時間，給一杯好咖啡</title>
   <style>
     :root {
       color-scheme: light;
       --cream: #f5f0e8;
       --paper: #fffcf6;
-      --green: #294832;
-      --green-dark: #203a29;
+      --green: #193d32;
+      --green-dark: #102e25;
       --coffee: #3b2a22;
       --caramel: #c46a3b;
+      --gold: #c98e3d;
+      --gold-soft: #efe1c7;
+      --feather: #66836b;
       --ink: #292725;
       --muted: #77716b;
       --line: #e6dfd3;
@@ -75,17 +78,10 @@
       border-bottom: 1px solid rgba(59, 42, 34, .1);
     }
     .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--green); }
-    .brand-mark {
-      display: grid;
-      width: 37px;
-      height: 37px;
-      place-items: center;
-      border: 1px solid rgba(41, 72, 50, .28);
-      border-radius: 50%;
-    }
-    .brand-mark svg { width: 20px; height: 20px; }
-    .brand-name { font-family: var(--serif); font-size: 18px; font-weight: 700; letter-spacing: .07em; }
+    .brand-mark { width: 72px; height: 72px; flex: 0 0 auto; border: 1px solid rgba(201, 142, 61, .38); border-radius: 50%; background: #f5f0e8; object-fit: cover; object-position: center 19%; }
+    .brand-name { font-family: var(--serif); font-size: 19px; font-weight: 700; letter-spacing: .04em; }
     .brand-caption { margin-top: 2px; color: var(--muted); font-size: 9px; letter-spacing: .14em; }
+    .brand-name, .brand-caption { display: block; }
     .nav-links { display: flex; align-items: center; gap: 34px; }
     .nav-links > a:not(.button) { color: #59564e; font-size: 12px; transition: color .2s ease; }
     .nav-links > a:not(.button):hover { color: var(--caramel); }
@@ -121,17 +117,17 @@
       min-height: 460px;
       overflow: hidden;
       border-radius: 48% 48% 45% 45% / 43% 43% 48% 48%;
-      background: #e6e5d7;
+      background: radial-gradient(ellipse at 68% 28%, rgba(201, 142, 61, .22), transparent 44%), #e6e5d7;
       isolation: isolate;
     }
     .hero-art::before {
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: linear-gradient(180deg, rgba(247, 244, 232, .02), rgba(31, 48, 34, .12));
+      background: linear-gradient(180deg, rgba(247, 244, 232, .02), rgba(25, 61, 50, .2));
       content: "";
     }
-    .hero-art img {
+    .hero-art > img {
       position: absolute;
       top: -18px;
       left: -500px;
@@ -145,8 +141,8 @@
       right: 4%;
       bottom: 11%;
       display: grid;
-      width: 100px;
-      height: 100px;
+      width: 150px;
+      height: 150px;
       align-content: center;
       justify-items: center;
       border: 1px solid rgba(255, 252, 246, .8);
@@ -156,15 +152,14 @@
       text-align: center;
       transform: rotate(9deg);
     }
-    .hero-stamp strong { font-family: var(--serif); font-size: 18px; }
-    .hero-stamp span { margin-top: 3px; font-size: 9px; letter-spacing: .1em; }
+    .hero-stamp-logo { width: 130px; height: 130px; border: 1px solid rgba(201, 142, 61, .38); border-radius: 50%; object-fit: cover; object-position: center 19%; mix-blend-mode: multiply; }
     .hero-index { position: absolute; bottom: 22px; left: 50%; color: rgba(255,255,255,.9); font-size: 10px; letter-spacing: .2em; transform: translateX(-50%); }
 
-    .qualities { border-block: 1px solid var(--line); background: rgba(255, 252, 246, .48); }
+    .qualities { border-block: 1px solid rgba(25, 61, 50, .12); background: linear-gradient(90deg, rgba(239, 225, 199, .34), rgba(255, 252, 246, .76) 48%, rgba(102, 131, 107, .1)); }
     .quality-row { display: grid; min-height: 103px; grid-template-columns: repeat(4, 1fr); align-items: center; }
     .quality { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; }
     .quality + .quality { border-left: 1px solid var(--line); }
-    .quality-icon { display: grid; width: 37px; height: 37px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #e9ede2; color: var(--green); }
+    .quality-icon { display: grid; width: 37px; height: 37px; flex: 0 0 auto; place-items: center; border: 1px solid rgba(201, 142, 61, .2); border-radius: 50%; background: var(--gold-soft); color: var(--green); }
     .quality-icon svg { width: 18px; height: 18px; }
     .quality strong { display: block; color: var(--coffee); font-family: var(--serif); font-size: 13px; }
     .quality span { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
@@ -178,7 +173,8 @@
       position: relative;
       min-width: 0;
       padding: 14px 14px 18px;
-      border: 1px solid rgba(59, 42, 34, .07);
+      border: 1px solid rgba(25, 61, 50, .1);
+      border-top: 2px solid rgba(201, 142, 61, .58);
       border-radius: 12px;
       background: var(--paper);
       box-shadow: 0 8px 26px rgba(58, 45, 31, .035);
@@ -188,10 +184,19 @@
     .drink-art { position: relative; display: grid; height: 220px; overflow: hidden; place-items: center; border-radius: 8px; background: #f0e9dd; }
     .drink-art::before, .drink-art::after { position: absolute; width: 195px; height: 195px; border: 1px solid rgba(41,72,50,.12); border-radius: 50%; content: ""; }
     .drink-art::after { width: 155px; height: 155px; border-color: rgba(196,106,59,.18); }
+    .drink-art.has-photo::before, .drink-art.has-photo::after { display: none; }
+    .drink-art > .product-image { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .drink-art.has-photo > svg { display: none; }
     .drink-art svg { position: relative; z-index: 1; width: 142px; height: 158px; filter: drop-shadow(0 13px 10px rgba(58, 42, 29, .16)); }
     .drink-art.green-bg { background: #e5e9dd; }
     .drink-art.rose-bg { background: #eee1d7; }
-    .tag { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 6px 9px; border-radius: 999px; background: var(--paper); color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .06em; }
+    .drink-art.sandwich-bg { background: #e8e9dc; }
+    .drink-art.toast-bg { background: #f0e3d3; }
+    .drink-art.dessert-bg { background: #efe1dc; }
+    .drink-art.cake-bg { background: #e9e5d8; }
+    .drink-art svg.food-illustration { width: 176px; height: 160px; }
+    .menu-illustrations { display: none; }
+    .tag { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 6px 9px; border: 1px solid rgba(201, 142, 61, .3); border-radius: 999px; background: rgba(255, 252, 246, .94); color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .06em; }
     .menu-info { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 17px 5px 0; }
     .menu-info h3 { margin: 0; color: var(--coffee); font-family: var(--serif); font-size: 18px; }
     .menu-info p { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
@@ -206,13 +211,16 @@
     .story-copy { display: flex; flex-direction: column; align-items: start; justify-content: center; padding: clamp(32px, 6vw, 76px); }
     .story-copy h2 { max-width: 450px; margin: 14px 0 16px; color: var(--green); font-family: var(--serif); font-size: clamp(32px, 4vw, 45px); font-weight: 600; line-height: 1.3; }
     .story-copy p { max-width: 390px; margin: 0 0 24px; color: #625c53; font-size: 12px; line-height: 2; }
+    .story-signature { display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; color: var(--green); }
+    .story-signature img { width: 64px; height: 64px; border: 1px solid rgba(201, 142, 61, .38); border-radius: 50%; background: #f5f0e8; object-fit: cover; object-position: center 19%; }
+    .story-signature span { font-size: 9px; font-weight: 700; letter-spacing: .14em; line-height: 1.7; }
     .story-image { position: relative; min-height: 320px; overflow: hidden; background: #d6c6ad; }
     .story-image img { position: absolute; top: -388px; left: -38px; width: 790px; max-width: none; height: auto; }
     .story-image::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(232,223,209,.1), transparent 40%); content: ""; }
 
-    .visit { position: relative; overflow: hidden; padding-block: 78px; background: var(--green); color: white; }
-    .visit::before, .visit::after { position: absolute; width: 410px; height: 410px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; content: ""; }
-    .visit::before { top: -275px; right: 6%; }
+    .visit { position: relative; overflow: hidden; padding-block: 78px; background: linear-gradient(120deg, #193d32 0%, #193d32 62%, #264b37 100%); color: white; }
+    .visit::before, .visit::after { position: absolute; width: 410px; height: 410px; border: 1px solid rgba(239, 225, 199, .2); border-radius: 50%; content: ""; }
+    .visit::before { top: -275px; right: 6%; box-shadow: 0 0 0 18px rgba(201, 142, 61, .035), 0 0 0 38px rgba(239, 225, 199, .035); }
     .visit::after { right: 12%; bottom: -340px; width: 500px; height: 500px; }
     .visit-grid { position: relative; z-index: 1; display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
     .visit-copy .eyebrow { color: #e5ac7e; }
@@ -236,7 +244,7 @@
     .booking .button:hover { background: #aa5730; }
     .form-status { min-height: 16px; margin: 10px 0 0; color: #f3d9c6; font-size: 10px; line-height: 1.5; }
 
-    .footer { padding-block: 31px; background: #1d3425; color: rgba(255,255,255,.72); }
+    .footer { padding-block: 31px; background: #102e25; color: rgba(255,255,255,.72); }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .footer .brand { color: white; }
     .footer .brand-caption { color: rgba(255,255,255,.52); }
@@ -261,9 +269,9 @@
       .hero-copy > p { font-size: 13px; }
       .hero-note { margin-top: 25px; }
       .hero-art { min-height: 380px; max-height: 460px; margin-inline: 16px; }
-      .hero-art img { top: -6px; left: -430px; width: 840px; }
-      .hero-stamp { right: 4%; bottom: 8%; width: 83px; height: 83px; }
-      .hero-stamp strong { font-size: 15px; }
+      .hero-art > img { top: -6px; left: -430px; width: 840px; }
+      .hero-stamp { right: 4%; bottom: 8%; width: 116px; height: 116px; }
+      .hero-stamp-logo { width: 98px; height: 98px; }
       .quality-row { grid-template-columns: 1fr 1fr; padding-block: 10px; }
       .quality { justify-content: start; padding: 12px 8px; }
       .quality:nth-child(3) { border-left: 0; }
@@ -293,16 +301,16 @@
     }
     @media (max-width: 460px) {
       .wrap { width: calc(100% - 32px); }
+      .brand-mark { width: 60px; height: 60px; }
       .brand-name { font-size: 16px; }
       .hero { padding-top: 37px; }
       .hero h1 { margin-top: 15px; font-size: 43px; }
       .hero-actions { gap: 9px; }
       .hero-actions .button { min-height: 45px; padding-inline: 17px; font-size: 12px; }
       .hero-art { min-height: 310px; margin-inline: 5px; }
-      .hero-art img { top: 0; left: -375px; width: 740px; }
-      .hero-stamp { right: 2%; bottom: 6%; width: 72px; height: 72px; }
-      .hero-stamp strong { font-size: 13px; }
-      .hero-stamp span { font-size: 8px; }
+      .hero-art > img { top: 0; left: -375px; width: 740px; }
+      .hero-stamp { right: 2%; bottom: 6%; width: 104px; height: 104px; }
+      .hero-stamp-logo { width: 88px; height: 88px; }
       .quality { gap: 8px; }
       .quality-icon { width: 32px; height: 32px; }
       .quality strong { font-size: 12px; }
@@ -314,6 +322,7 @@
       .drink-art::before { width: 130px; height: 130px; }
       .drink-art::after { width: 100px; height: 100px; }
       .drink-art svg { width: 94px; height: 113px; }
+      .drink-art svg.food-illustration { width: 138px; height: 122px; }
       .tag { top: 8px; left: 8px; padding: 5px 7px; font-size: 8px; }
       .menu-card { padding: 7px 7px 11px; }
       .menu-info h3 { font-size: 14px; }
@@ -336,11 +345,9 @@
 <body>
   <header class="site-header">
     <nav class="nav wrap" aria-label="主要導覽">
-      <a class="brand" href="#" aria-label="慢焙日常首頁">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 6c-1-1 1-1.5 0-2.5M12 6c-1-1 1-1.5 0-2.5"/></svg>
-        </span>
-        <span><span class="brand-name">慢焙日常</span><span class="brand-caption">SLOW ROAST · GOOD DAYS</span></span>
+      <a class="brand" href="#" aria-label="PAJARO Coffee 首頁">
+        <img class="brand-mark" src="../img/Gemini_Generated_Image_5rf5ro5rf5ro5rf5.jpg" alt="">
+        <span><span class="brand-name">PAJARO Coffee</span><span class="brand-caption">COFFEE &amp; GOOD DAYS</span></span>
       </a>
       <a class="button mobile-booking" href="#visit">立即訂位</a>
       <button class="mobile-menu-toggle" type="button" aria-label="開啟導覽選單" aria-expanded="false">
@@ -364,13 +371,13 @@
         <p>嚴選咖啡豆，細心慢慢烘焙。無論是匆忙日常的一次停靠，或午後自在的久坐，都有一杯剛剛好的風味等你。</p>
         <div class="hero-actions">
           <a class="button" href="#menu">探索今日菜單 <span aria-hidden="true">↗</span></a>
-          <a class="button button-outline" href="#story">認識慢焙日常</a>
+          <a class="button button-outline" href="#story">認識 PAJARO Coffee</a>
         </div>
         <div class="hero-note"><span class="note-dot"></span>每日新鮮手作・為每一段日常留白</div>
       </div>
       <div class="hero-art" role="img" aria-label="拉花拿鐵與咖啡館綠意的視覺主圖">
         <img src="../a1c87e22b1c51ef472613b0c7ce8a837.jpg" alt="" fetchpriority="high">
-        <div class="hero-stamp"><strong>手作<br>好日常</strong><span>EST. 2024</span></div>
+        <div class="hero-stamp"><img class="hero-stamp-logo" src="../img/Gemini_Generated_Image_5rf5ro5rf5ro5rf5.jpg" alt="PAJARO Coffee 鸚鵡與咖啡杯標誌"></div>
         <span class="hero-index">COFFEE · SLOW LIVING</span>
       </div>
     </section>
@@ -400,14 +407,77 @@
       <div class="section-heading">
         <div>
           <span class="eyebrow">A FEW HOUSE FAVORITES</span>
-          <h2>今天，想喝哪一杯？</h2>
+          <h2>今天，想來點什麼？</h2>
         </div>
-        <p>從醇厚拿鐵到清爽冷萃，挑一杯適合今天的風味。每日品項與供應狀況依門市為準。</p>
+        <p>咖啡、現做三明治與午後甜點，為不同時刻準備剛剛好的選擇。品項與售價皆為提案示意，實際供應依門市為準。</p>
       </div>
+      <svg class="menu-illustrations" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <symbol id="espresso-cup" viewBox="0 0 160 180">
+          <ellipse cx="80" cy="151" rx="43" ry="8" fill="#604735" opacity=".14"/>
+          <path d="M37 73h81v42a31 31 0 0 1-31 31H68a31 31 0 0 1-31-31V73Z" fill="#fffaf0" stroke="#bca98f" stroke-width="3"/>
+          <path d="M118 83h8a18 18 0 0 1 0 36h-10" fill="none" stroke="#bca98f" stroke-width="7"/>
+          <path d="M43 81h69v30a23 23 0 0 1-23 23H66a23 23 0 0 1-23-23V81Z" fill="#835035"/>
+          <path d="M58 91c9-10 18 9 28-1 8-8 16 6 22 0" fill="none" stroke="#ead5ad" stroke-width="4" stroke-linecap="round"/>
+          <path d="M59 60c6-8 1-12 8-20m15 19c6-8 1-12 8-20m15 21c6-8 1-12 8-20" fill="none" stroke="#b98758" stroke-width="4" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="sandwich" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="65" ry="8" fill="#604735" opacity=".14"/>
+          <path d="m35 101 14-50a12 12 0 0 1 18-7l74 42-19 47-75-13a14 14 0 0 1-12-19Z" fill="#e2b875" stroke="#9e7042" stroke-width="3"/>
+          <path d="m48 94 13-38 70 40-15 33-61-11a8 8 0 0 1-7-10Z" fill="#f3e8c9"/>
+          <path d="m57 87 8-24 59 34-8 16-53-10a7 7 0 0 1-6-9Z" fill="#78905c"/>
+          <path d="m61 103 7-14 48 9-5 15-42-5a8 8 0 0 1-8-5Z" fill="#b85c41"/>
+          <path d="m54 60 8-14a6 6 0 0 1 9-2l63 36-8 14-72-34Z" fill="#f8d997"/>
+        </symbol>
+        <symbol id="panini" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="65" ry="8" fill="#604735" opacity=".14"/>
+          <path d="M30 91a61 36 0 0 1 120 0v13H30V91Z" fill="#d8a65f" stroke="#9e7042" stroke-width="3"/>
+          <path d="M33 95h114v20H33z" fill="#77905c"/>
+          <path d="M36 102h108v12H36z" fill="#b85c41"/>
+          <path d="M37 115h106a54 27 0 0 1-106 0Z" fill="#e7bc78" stroke="#9e7042" stroke-width="3"/>
+          <path d="m57 70 15 16m17-26 15 16m17-8 15 16" stroke="#f6dfae" stroke-width="4" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="quiche" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="64" ry="8" fill="#604735" opacity=".14"/>
+          <path d="M30 103a60 43 0 1 1 120 0v12H30v-12Z" fill="#dfb878" stroke="#9e7042" stroke-width="3"/>
+          <path d="M38 99a52 34 0 1 1 104 0v8H38v-8Z" fill="#f1d99f"/>
+          <path d="M60 79c6-9 13-8 16 0s-6 13-12 9m36-19c7-8 15-3 13 5s-10 10-15 4m15 23c7-6 14-1 12 6s-9 8-14 2" fill="#7b8d55"/>
+          <circle cx="77" cy="98" r="5" fill="#bd6649"/><circle cx="105" cy="85" r="5" fill="#bd6649"/>
+        </symbol>
+        <symbol id="scone" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="64" ry="8" fill="#604735" opacity=".14"/>
+          <path d="M36 119 48 73a17 17 0 0 1 21-12l46-8a18 18 0 0 1 20 17l11 48H36Z" fill="#d7a862" stroke="#9e7042" stroke-width="3"/>
+          <path d="m51 85 19 6-7 11 22 5-9 12m21-52 7 17 15-9m-17 29 18-5 8 13" fill="none" stroke="#f3d9a5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M42 120h94" stroke="#b27a43" stroke-width="4" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="cheesecake" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="65" ry="8" fill="#604735" opacity=".14"/>
+          <path d="m35 116 14-73 89 26-9 67-94-20Z" fill="#eddaa8" stroke="#a77c49" stroke-width="3" stroke-linejoin="round"/>
+          <path d="m49 43 89 26-10 20-89-25 10-21Z" fill="#fff0c9" stroke="#a77c49" stroke-width="3" stroke-linejoin="round"/>
+          <path d="m43 105 93 23-3 8-94-20 4-11Z" fill="#9b6742"/>
+          <path d="M77 56c10-8 20 4 30 3m-16 11c7-5 13 4 20 3" fill="none" stroke="#fff9e8" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="111" cy="52" r="9" fill="#b95242"/><path d="M111 43c2-7 7-8 11-8" fill="none" stroke="#617647" stroke-width="3" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="pudding" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="56" ry="8" fill="#604735" opacity=".14"/>
+          <path d="M48 91h84l-8 38a12 12 0 0 1-12 9H68a12 12 0 0 1-12-9l-8-38Z" fill="#fffaf0" stroke="#c8b9a2" stroke-width="3"/>
+          <path d="M58 73h64v26a32 26 0 0 1-64 0V73Z" fill="#edcf8a" stroke="#c39556" stroke-width="3"/>
+          <path d="M58 76c10-11 20 7 32-1 12-9 21 5 32-2v12c-12 6-21-5-32 2s-20-4-32 2V76Z" fill="#a85d39"/>
+          <path d="M54 91h71" stroke="#e0d1b8" stroke-width="3"/>
+        </symbol>
+        <symbol id="brownie" viewBox="0 0 180 160">
+          <ellipse cx="90" cy="137" rx="60" ry="8" fill="#604735" opacity=".14"/>
+          <path d="m40 80 37-30 65 21-38 31-64-22Z" fill="#6c3e2d" stroke="#4d3025" stroke-width="3" stroke-linejoin="round"/>
+          <path d="m40 80 64 22-4 38-61-22 1-38Z" fill="#7c4a34" stroke="#4d3025" stroke-width="3" stroke-linejoin="round"/>
+          <path d="m104 102 38-31-2 38-40 31 4-38Z" fill="#593528" stroke="#4d3025" stroke-width="3" stroke-linejoin="round"/>
+          <path d="m54 82 20-16m7 23 19-17m7 26 18-14" stroke="#d7ab72" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="70" cy="95" r="3" fill="#f2dec0"/><circle cx="88" cy="109" r="3" fill="#f2dec0"/><circle cx="119" cy="93" r="3" fill="#f2dec0"/>
+        </symbol>
+      </svg>
       <div class="menu-grid">
         <article class="menu-card">
-          <div class="drink-art">
-            <span class="tag">人氣推薦</span>
+          <div class="drink-art has-photo">
+            <span class="tag">咖啡・人氣推薦</span>
+            <img class="product-image" src="../img/caramel%20salt%20latte.jpg" alt="焦糖海鹽拿鐵">
             <svg viewBox="0 0 160 180" aria-hidden="true">
               <defs><linearGradient id="latte-glass" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fffaf0"/><stop offset=".45" stop-color="#e6d9c5"/><stop offset="1" stop-color="#c5a985"/></linearGradient><linearGradient id="latte-coffee" x1="0" x2="1"><stop stop-color="#8f4e2c"/><stop offset=".5" stop-color="#c37b42"/><stop offset="1" stop-color="#71402a"/></linearGradient></defs>
               <ellipse cx="80" cy="158" rx="43" ry="8" fill="#604735" opacity=".14"/><path d="M39 53h82l-9 86a13 13 0 0 1-13 12H61a13 13 0 0 1-13-12l-9-86Z" fill="url(#latte-glass)" stroke="#bca98f" stroke-width="2"/><path d="M43 69h74l-7 67H52l-9-67Z" fill="url(#latte-coffee)"/><path d="M45 73c10-8 22 5 32-1 11-7 21 5 38 0l-2 14c-13 4-24-5-35 2-12 8-20-4-31 1l-2-16Z" fill="#f3ead8" opacity=".94"/><path d="M77 79c15-7 25 6 13 12-10 5 3 10 14 3-4 15-27 14-32 4-4-8 15-9 5-19Z" fill="#fff5e5" opacity=".9"/><path d="M61 49c5-10 1-14 8-20M82 48c5-10 1-14 8-20M101 49c5-10 1-14 8-20" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" opacity=".7"/><path d="M49 148h61" stroke="#fffaf0" stroke-width="2" opacity=".6"/>
@@ -417,8 +487,9 @@
           <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
         </article>
         <article class="menu-card">
-          <div class="drink-art green-bg">
-            <span class="tag">當日手沖</span>
+          <div class="drink-art green-bg has-photo">
+            <span class="tag">咖啡・當日手沖</span>
+            <img class="product-image" src="../img/flower%20coffee.jpg" alt="花果香單品手沖咖啡">
             <svg viewBox="0 0 160 180" aria-hidden="true">
               <defs><linearGradient id="pour-glass" x1="0" x2="1"><stop stop-color="#fffdf5"/><stop offset=".55" stop-color="#e7dfd1"/><stop offset="1" stop-color="#c6b7a0"/></linearGradient><linearGradient id="pour-coffee" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#98633d"/><stop offset="1" stop-color="#533726"/></linearGradient></defs>
               <ellipse cx="81" cy="158" rx="43" ry="8" fill="#42533e" opacity=".15"/><path d="M46 63h70l-7 76a13 13 0 0 1-13 12H67a13 13 0 0 1-13-12l-8-76Z" fill="url(#pour-glass)" stroke="#b9ae9a" stroke-width="2"/><path d="M51 86h60l-6 52H57l-6-52Z" fill="url(#pour-coffee)"/><path d="M53 88c13-7 19 7 30 1 10-6 20 4 27-1" fill="none" stroke="#d7ae7a" stroke-width="4" stroke-linecap="round"/><path d="M79 27v33M68 43l11 17 12-17" fill="none" stroke="#9f815c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 51h39l-5 13H65l-5-13Z" fill="#e1d4c0" stroke="#b9ae9a" stroke-width="2"/>
@@ -428,8 +499,9 @@
           <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
         </article>
         <article class="menu-card">
-          <div class="drink-art rose-bg">
-            <span class="tag">午後限定</span>
+          <div class="drink-art rose-bg has-photo">
+            <span class="tag">咖啡・午後推薦</span>
+            <img class="product-image" src="../img/orange%20ice%20coffee.jpg" alt="帶有柑橘片的柑橘慢萃冷咖啡">
             <svg viewBox="0 0 160 180" aria-hidden="true">
               <defs><linearGradient id="cold-glass" x1="0" x2="1"><stop stop-color="#f8f4e9" stop-opacity=".85"/><stop offset=".5" stop-color="#ddd4c6" stop-opacity=".65"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/></linearGradient><linearGradient id="cold-brew" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#895335"/><stop offset="1" stop-color="#39291f"/></linearGradient></defs>
               <ellipse cx="81" cy="158" rx="42" ry="8" fill="#604735" opacity=".14"/><path d="M42 54h76l-8 88a13 13 0 0 1-13 12H63a13 13 0 0 1-13-12l-8-88Z" fill="url(#cold-glass)" stroke="#bba997" stroke-width="2"/><path d="M47 84h66l-5 56H53l-6-56Z" fill="url(#cold-brew)"/><path d="m60 72 17 16-9 13-16-17ZM91 68l18 11-9 15-18-11Z" fill="#e5ddcf" stroke="#fff5e5" stroke-width="2"/><path d="m96 37 15 44" stroke="#e6a457" stroke-width="5" stroke-linecap="round"/><path d="M53 121c17 6 35-6 54 0" fill="none" stroke="#bd8655" stroke-width="2" opacity=".7"/>
@@ -438,8 +510,89 @@
           <div class="menu-info"><div><h3>柑橘慢萃冷咖啡</h3><p>低溫慢萃的柔和醇香，襯上清新柑橘尾韻。</p></div><span class="price">NT$150</span></div>
           <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
         </article>
+        <article class="menu-card">
+          <div class="drink-art green-bg has-photo">
+            <span class="tag">咖啡・經典款</span>
+            <img class="product-image" src="../img/americano.jpg" alt="經典濃縮美式咖啡">
+            <svg class="food-illustration" viewBox="0 0 160 180" aria-hidden="true"><use href="#espresso-cup"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>經典濃縮美式</h3><p>濃縮咖啡注入熱水，帶出乾淨俐落的堅果香。</p></div><span class="price">NT$110</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art sandwich-bg has-photo">
+            <span class="tag">輕食・三明治</span>
+            <img class="product-image" src="../img/chicken%20avogato%20sandwich.jpg" alt="慢烤雞肉酪梨三明治">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#sandwich"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>慢烤雞肉酪梨三明治</h3><p>香煎雞肉、酪梨與生菜，夾入每日現烤麵包。</p></div><span class="price">NT$190</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art toast-bg has-photo">
+            <span class="tag">輕食・蔬食</span>
+            <img class="product-image" src="../img/vegetabal%20cheese%20sandwich.jpg" alt="田園鮮蔬起司三明治">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#sandwich"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>田園鮮蔬起司三明治</h3><p>番茄、嫩葉與融化起司，清爽飽足的蔬食選擇。</p></div><span class="price">NT$160</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art sandwich-bg has-photo">
+            <span class="tag">輕食・熱壓</span>
+            <img class="product-image" src="../img/tomato%20panini.jpg" alt="番茄羅勒熱壓帕尼尼">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#panini"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>番茄羅勒熱壓帕尼尼</h3><p>番茄、羅勒與起司熱壓至金黃，趁熱享用。</p></div><span class="price">NT$175</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art toast-bg has-photo">
+            <span class="tag">輕食・鹹點</span>
+            <img class="product-image" src="../img/mushroom%20pie.jpg" alt="野菇菠菜鹹派">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#quiche"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>野菇菠菜鹹派</h3><p>奶香蛋餡搭配野菇與菠菜，適合午茶時段享用。</p></div><span class="price">NT$155</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art dessert-bg has-photo">
+            <span class="tag">甜點・手作</span>
+            <img class="product-image" src="../img/%E5%A5%B6%E6%B2%B9%E4%BC%AF%E7%88%B5%E6%96%AF%E5%BA%B7.jpg" alt="奶油伯爵司康，附奶油與莓果果醬">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#scone"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>奶油伯爵司康</h3><p>伯爵茶香揉入鬆酥麵糰，搭配咖啡剛剛好。</p></div><span class="price">NT$85</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art cake-bg has-photo">
+            <span class="tag">甜點・人氣推薦</span>
+            <img class="product-image" src="../img/vanilla%20cheese%20cake.jpg" alt="香草重乳酪蛋糕">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#cheesecake"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>香草重乳酪蛋糕</h3><p>綿密乳酪與香草氣息交織，附一抹餅乾底香。</p></div><span class="price">NT$145</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art dessert-bg has-photo">
+            <span class="tag">甜點・經典款</span>
+            <img class="product-image" src="../img/caramel%20pudding.jpg" alt="淋上焦糖醬的手作布丁">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#pudding"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>焦糖手作布丁</h3><p>滑嫩蛋香配上微苦焦糖，簡單耐吃的經典甜點。</p></div><span class="price">NT$95</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art cake-bg has-photo">
+            <span class="tag">甜點・巧克力</span>
+            <img class="product-image" src="../img/%E5%B7%A7%E5%85%8B%E5%8A%9B%E5%B8%83%E6%9C%97%E5%B0%BC.jpg" alt="苦甜巧克力布朗尼">
+            <svg class="food-illustration" viewBox="0 0 180 160" aria-hidden="true"><use href="#brownie"/></svg>
+          </div>
+          <div class="menu-info"><div><h3>苦甜巧克力布朗尼</h3><p>濃郁可可與核桃口感，搭配無糖咖啡更合拍。</p></div><span class="price">NT$110</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
       </div>
-      <p class="menu-footnote">* 圖片為風格示意，實際飲品依門市供應為準。</p>
+      <p class="menu-footnote">* 商品插畫、品項與價格皆為規劃示意，實際內容與供應狀況請以門市公告為準。</p>
     </section>
 
     <section class="story wrap" id="story">
@@ -447,7 +600,8 @@
         <div class="story-copy">
           <span class="eyebrow">OUR LITTLE COFFEE CORNER</span>
           <h2>不只是咖啡，<br>也是日常裡的小小停靠。</h2>
-          <p>慢焙日常從一個簡單的念頭開始：讓好咖啡，成為每一天都能享有的小事。細心選豆、耐心烘焙，也為你留一個可以自在呼吸的角落。</p>
+          <p>PAJARO Coffee 從一個簡單的念頭開始：讓好咖啡，成為每一天都能享有的小事。細心選豆、耐心烘焙，也為你留一個可以自在呼吸的角落。</p>
+          <div class="story-signature"><img src="../img/Gemini_Generated_Image_5rf5ro5rf5ro5rf5.jpg" alt=""><span>PAJARO COFFEE<br>COFFEE &amp; GOOD DAYS</span></div>
           <a class="button" href="#visit">走進我們的故事 <span aria-hidden="true">↗</span></a>
         </div>
         <div class="story-image" role="img" aria-label="咖啡與日常生活風格影像">
@@ -486,11 +640,11 @@
   <footer class="footer">
     <div class="footer-row wrap">
       <a class="brand" href="#home">
-        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 6c-1-1 1-1.5 0-2.5M12 6c-1-1 1-1.5 0-2.5"/></svg></span>
-        <span><span class="brand-name">慢焙日常</span><span class="brand-caption">SLOW ROAST · GOOD DAYS</span></span>
+        <img class="brand-mark" src="../img/Gemini_Generated_Image_5rf5ro5rf5ro5rf5.jpg" alt="">
+        <span><span class="brand-name">PAJARO Coffee</span><span class="brand-caption">COFFEE &amp; GOOD DAYS</span></span>
       </a>
       <div class="footer-links"><a href="#menu">咖啡與餐點</a><a href="#story">品牌故事</a><a href="#visit">門市資訊</a></div>
-      <span class="footer-copy">© 2026 慢焙日常・視覺提案示意</span>
+      <span class="footer-copy">© 2026 PAJARO Coffee・視覺提案示意</span>
     </div>
   </footer>
 

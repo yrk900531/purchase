@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e8">
+  <title>慢焙日常｜留一點時間，給一杯好咖啡</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #f5f0e8;
+      --paper: #fffcf6;
+      --green: #294832;
+      --green-dark: #203a29;
+      --coffee: #3b2a22;
+      --caramel: #c46a3b;
+      --ink: #292725;
+      --muted: #77716b;
+      --line: #e6dfd3;
+      --serif: "Source Han Serif TC", "Noto Serif TC", "Noto Serif CJK TC", Georgia, serif;
+      --sans: "Source Han Sans TC", "Noto Sans TC", "Noto Sans CJK TC", Arial, sans-serif;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--cream);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--caramel);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 24px; height: 1px; background: currentColor; content: ""; }
+    .serif { font-family: var(--serif); }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 0 23px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform .2s ease, background .2s ease;
+      cursor: pointer;
+    }
+    .button:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .button svg { width: 15px; height: 15px; }
+    .button-outline { border-color: #d7cebf; background: transparent; color: var(--green); }
+    .button-outline:hover { background: #e9e3d8; color: var(--green); }
+
+    .site-header { position: relative; z-index: 3; }
+    .nav {
+      display: flex;
+      min-height: 86px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(59, 42, 34, .1);
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--green); }
+    .brand-mark {
+      display: grid;
+      width: 37px;
+      height: 37px;
+      place-items: center;
+      border: 1px solid rgba(41, 72, 50, .28);
+      border-radius: 50%;
+    }
+    .brand-mark svg { width: 20px; height: 20px; }
+    .brand-name { font-family: var(--serif); font-size: 18px; font-weight: 700; letter-spacing: .07em; }
+    .brand-caption { margin-top: 2px; color: var(--muted); font-size: 9px; letter-spacing: .14em; }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links > a:not(.button) { color: #59564e; font-size: 12px; transition: color .2s ease; }
+    .nav-links > a:not(.button):hover { color: var(--caramel); }
+    .nav-links .button { min-height: 42px; padding-inline: 19px; font-size: 12px; }
+    .mobile-booking { display: none; }
+
+    .hero {
+      display: grid;
+      min-height: 600px;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 44px;
+      padding-block: 54px 72px;
+    }
+    .hero-copy { position: relative; z-index: 1; padding-block: 24px; }
+    .hero h1 {
+      max-width: 590px;
+      margin: 20px 0 18px;
+      color: var(--green);
+      font-family: var(--serif);
+      font-size: clamp(46px, 5.5vw, 73px);
+      font-weight: 600;
+      letter-spacing: -.055em;
+      line-height: 1.17;
+    }
+    .hero h1 em { color: var(--caramel); font-style: normal; }
+    .hero-copy > p { max-width: 425px; margin: 0; color: #676159; font-size: 14px; line-height: 2; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 38px; color: var(--muted); font-size: 11px; }
+    .note-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--caramel); box-shadow: 0 0 0 4px rgba(196, 106, 59, .12); }
+    .hero-art {
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+      border-radius: 48% 48% 45% 45% / 43% 43% 48% 48%;
+      background: #e6e5d7;
+      isolation: isolate;
+    }
+    .hero-art::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(247, 244, 232, .02), rgba(31, 48, 34, .12));
+      content: "";
+    }
+    .hero-art img {
+      position: absolute;
+      top: -18px;
+      left: -500px;
+      width: 970px;
+      max-width: none;
+      height: auto;
+      user-select: none;
+    }
+    .hero-stamp {
+      position: absolute;
+      right: 4%;
+      bottom: 11%;
+      display: grid;
+      width: 100px;
+      height: 100px;
+      align-content: center;
+      justify-items: center;
+      border: 1px solid rgba(255, 252, 246, .8);
+      border-radius: 50%;
+      background: rgba(245, 240, 232, .9);
+      color: var(--green);
+      text-align: center;
+      transform: rotate(9deg);
+    }
+    .hero-stamp strong { font-family: var(--serif); font-size: 18px; }
+    .hero-stamp span { margin-top: 3px; font-size: 9px; letter-spacing: .1em; }
+    .hero-index { position: absolute; bottom: 22px; left: 50%; color: rgba(255,255,255,.9); font-size: 10px; letter-spacing: .2em; transform: translateX(-50%); }
+
+    .qualities { border-block: 1px solid var(--line); background: rgba(255, 252, 246, .48); }
+    .quality-row { display: grid; min-height: 103px; grid-template-columns: repeat(4, 1fr); align-items: center; }
+    .quality { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 12px; }
+    .quality + .quality { border-left: 1px solid var(--line); }
+    .quality-icon { display: grid; width: 37px; height: 37px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #e9ede2; color: var(--green); }
+    .quality-icon svg { width: 18px; height: 18px; }
+    .quality strong { display: block; color: var(--coffee); font-family: var(--serif); font-size: 13px; }
+    .quality span { display: block; margin-top: 4px; color: var(--muted); font-size: 10px; }
+
+    .section { padding-block: 106px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 35px; }
+    .section-heading h2 { margin: 11px 0 0; color: var(--green); font-family: var(--serif); font-size: clamp(32px, 4vw, 45px); font-weight: 600; letter-spacing: -.035em; }
+    .section-heading p { max-width: 330px; margin: 0 0 4px; color: var(--muted); font-size: 12px; line-height: 1.9; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .menu-card {
+      position: relative;
+      min-width: 0;
+      padding: 14px 14px 18px;
+      border: 1px solid rgba(59, 42, 34, .07);
+      border-radius: 12px;
+      background: var(--paper);
+      box-shadow: 0 8px 26px rgba(58, 45, 31, .035);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 35px rgba(58, 45, 31, .09); }
+    .drink-art { position: relative; display: grid; height: 220px; overflow: hidden; place-items: center; border-radius: 8px; background: #f0e9dd; }
+    .drink-art::before, .drink-art::after { position: absolute; width: 195px; height: 195px; border: 1px solid rgba(41,72,50,.12); border-radius: 50%; content: ""; }
+    .drink-art::after { width: 155px; height: 155px; border-color: rgba(196,106,59,.18); }
+    .drink-art svg { position: relative; z-index: 1; width: 142px; height: 158px; filter: drop-shadow(0 13px 10px rgba(58, 42, 29, .16)); }
+    .drink-art.green-bg { background: #e5e9dd; }
+    .drink-art.rose-bg { background: #eee1d7; }
+    .tag { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 6px 9px; border-radius: 999px; background: var(--paper); color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .06em; }
+    .menu-info { display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 17px 5px 0; }
+    .menu-info h3 { margin: 0; color: var(--coffee); font-family: var(--serif); font-size: 18px; }
+    .menu-info p { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .price { flex: 0 0 auto; padding-top: 2px; color: var(--green); font-size: 14px; font-weight: 700; }
+    .menu-link { display: inline-flex; align-items: center; gap: 7px; margin: 20px 5px 0; color: var(--caramel); font-size: 11px; font-weight: 700; }
+    .menu-link svg { width: 13px; height: 13px; transition: transform .2s ease; }
+    .menu-link:hover svg { transform: translateX(3px); }
+    .menu-footnote { margin: 19px 0 0; color: #8d867d; font-size: 10px; }
+
+    .story { padding-block: 15px 100px; }
+    .story-panel { display: grid; min-height: 390px; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 15px; background: #e8dfd1; }
+    .story-copy { display: flex; flex-direction: column; align-items: start; justify-content: center; padding: clamp(32px, 6vw, 76px); }
+    .story-copy h2 { max-width: 450px; margin: 14px 0 16px; color: var(--green); font-family: var(--serif); font-size: clamp(32px, 4vw, 45px); font-weight: 600; line-height: 1.3; }
+    .story-copy p { max-width: 390px; margin: 0 0 24px; color: #625c53; font-size: 12px; line-height: 2; }
+    .story-image { position: relative; min-height: 320px; overflow: hidden; background: #d6c6ad; }
+    .story-image img { position: absolute; top: -388px; left: -38px; width: 790px; max-width: none; height: auto; }
+    .story-image::after { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(232,223,209,.1), transparent 40%); content: ""; }
+
+    .visit { position: relative; overflow: hidden; padding-block: 78px; background: var(--green); color: white; }
+    .visit::before, .visit::after { position: absolute; width: 410px; height: 410px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; content: ""; }
+    .visit::before { top: -275px; right: 6%; }
+    .visit::after { right: 12%; bottom: -340px; width: 500px; height: 500px; }
+    .visit-grid { position: relative; z-index: 1; display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; }
+    .visit-copy .eyebrow { color: #e5ac7e; }
+    .visit-copy h2 { margin: 15px 0 13px; font-family: var(--serif); font-size: clamp(35px, 4vw, 48px); font-weight: 500; line-height: 1.25; }
+    .visit-copy > p { max-width: 380px; margin: 0; color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.9; }
+    .visit-details { display: grid; gap: 17px; margin-top: 29px; }
+    .visit-detail { display: flex; align-items: start; gap: 12px; color: rgba(255,255,255,.9); font-size: 12px; line-height: 1.7; }
+    .visit-detail svg { width: 17px; height: 17px; flex: 0 0 auto; margin-top: 1px; color: #e5ac7e; }
+    .booking { padding: 29px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; background: rgba(255,255,255,.08); }
+    .booking h3 { margin: 0 0 7px; font-family: var(--serif); font-size: 23px; font-weight: 500; }
+    .booking > p { margin: 0 0 20px; color: rgba(255,255,255,.68); font-size: 11px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-field { display: grid; gap: 7px; }
+    .form-field label { color: rgba(255,255,255,.77); font-size: 10px; }
+    .form-field input, .form-field select { width: 100%; height: 43px; padding: 0 12px; border: 1px solid rgba(255,255,255,.24); border-radius: 6px; outline: 0; background: rgba(255,255,255,.08); color: white; font-size: 12px; }
+    .form-field input:focus, .form-field select:focus { border-color: #e5ac7e; box-shadow: 0 0 0 3px rgba(229,172,126,.15); }
+    .form-field input::placeholder { color: rgba(255,255,255,.44); }
+    .form-field select option { color: var(--ink); }
+    .form-wide { grid-column: 1 / -1; }
+    .booking .button { width: 100%; margin-top: 17px; background: var(--caramel); }
+    .booking .button:hover { background: #aa5730; }
+    .form-status { min-height: 16px; margin: 10px 0 0; color: #f3d9c6; font-size: 10px; line-height: 1.5; }
+
+    .footer { padding-block: 31px; background: #1d3425; color: rgba(255,255,255,.72); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer .brand { color: white; }
+    .footer .brand-caption { color: rgba(255,255,255,.52); }
+    .footer-copy { font-size: 10px; }
+    .footer-links { display: flex; gap: 20px; font-size: 10px; }
+    .footer-links a:hover { color: white; }
+    .mobile-menu-toggle { display: none; }
+
+    @media (max-width: 800px) {
+      .wrap { width: min(100% - 40px, 600px); }
+      .nav { min-height: 72px; }
+      .nav-links { position: absolute; top: 71px; right: 20px; left: 20px; display: none; align-items: stretch; gap: 0; padding: 10px 18px 18px; border: 1px solid var(--line); border-radius: 0 0 12px 12px; background: var(--paper); box-shadow: 0 16px 25px rgba(38,32,25,.1); }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links > a:not(.button) { padding: 13px 2px; border-bottom: 1px solid var(--line); }
+      .nav-links .button { margin-top: 13px; }
+      .mobile-booking { display: inline-flex; min-height: 39px; margin-left: auto; margin-right: 10px; padding-inline: 14px; font-size: 11px; }
+      .mobile-menu-toggle { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--green); cursor: pointer; }
+      .mobile-menu-toggle svg { width: 18px; height: 18px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 27px; padding-block: 47px 52px; }
+      .hero-copy { padding: 0; }
+      .hero h1 { max-width: 530px; font-size: clamp(43px, 10vw, 64px); }
+      .hero-copy > p { font-size: 13px; }
+      .hero-note { margin-top: 25px; }
+      .hero-art { min-height: 380px; max-height: 460px; margin-inline: 16px; }
+      .hero-art img { top: -6px; left: -430px; width: 840px; }
+      .hero-stamp { right: 4%; bottom: 8%; width: 83px; height: 83px; }
+      .hero-stamp strong { font-size: 15px; }
+      .quality-row { grid-template-columns: 1fr 1fr; padding-block: 10px; }
+      .quality { justify-content: start; padding: 12px 8px; }
+      .quality:nth-child(3) { border-left: 0; }
+      .quality:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .section { padding-block: 74px; }
+      .section-heading { align-items: start; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+      .section-heading p { max-width: 420px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .drink-art { height: 180px; }
+      .drink-art svg { width: 120px; height: 137px; }
+      .menu-card { padding: 10px 10px 14px; }
+      .menu-info { gap: 5px; padding: 13px 3px 0; }
+      .menu-info h3 { font-size: 16px; }
+      .menu-info p { font-size: 10px; }
+      .price { font-size: 12px; }
+      .menu-link { margin: 16px 3px 0; }
+      .story { padding-block: 0 74px; }
+      .story-panel { grid-template-columns: 1fr; }
+      .story-copy { padding: 38px 30px 34px; }
+      .story-image { min-height: 270px; }
+      .story-image img { top: -330px; left: -15px; width: 680px; }
+      .visit { padding-block: 62px; }
+      .visit-grid { grid-template-columns: 1fr; gap: 34px; }
+      .visit-copy > p { max-width: 500px; }
+      .footer-row { align-items: start; flex-wrap: wrap; }
+      .footer-copy { order: 3; width: 100%; }
+    }
+    @media (max-width: 460px) {
+      .wrap { width: calc(100% - 32px); }
+      .brand-name { font-size: 16px; }
+      .hero { padding-top: 37px; }
+      .hero h1 { margin-top: 15px; font-size: 43px; }
+      .hero-actions { gap: 9px; }
+      .hero-actions .button { min-height: 45px; padding-inline: 17px; font-size: 12px; }
+      .hero-art { min-height: 310px; margin-inline: 5px; }
+      .hero-art img { top: 0; left: -375px; width: 740px; }
+      .hero-stamp { right: 2%; bottom: 6%; width: 72px; height: 72px; }
+      .hero-stamp strong { font-size: 13px; }
+      .hero-stamp span { font-size: 8px; }
+      .quality { gap: 8px; }
+      .quality-icon { width: 32px; height: 32px; }
+      .quality strong { font-size: 12px; }
+      .quality span { font-size: 9px; }
+      .section { padding-block: 62px; }
+      .section-heading h2 { font-size: 32px; }
+      .menu-grid { grid-template-columns: 1fr 1fr; gap: 9px; }
+      .drink-art { height: 142px; }
+      .drink-art::before { width: 130px; height: 130px; }
+      .drink-art::after { width: 100px; height: 100px; }
+      .drink-art svg { width: 94px; height: 113px; }
+      .tag { top: 8px; left: 8px; padding: 5px 7px; font-size: 8px; }
+      .menu-card { padding: 7px 7px 11px; }
+      .menu-info h3 { font-size: 14px; }
+      .menu-info p { font-size: 9px; }
+      .menu-info { flex-direction: column; gap: 6px; }
+      .menu-link { margin-top: 12px; font-size: 10px; }
+      .story-copy { padding-inline: 23px; }
+      .story-image { min-height: 225px; }
+      .story-image img { top: -285px; left: -10px; width: 580px; }
+      .booking { padding: 21px 17px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-wide { grid-column: auto; }
+      .footer-links { width: 100%; order: 2; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="主要導覽">
+      <a class="brand" href="#" aria-label="慢焙日常首頁">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 6c-1-1 1-1.5 0-2.5M12 6c-1-1 1-1.5 0-2.5"/></svg>
+        </span>
+        <span><span class="brand-name">慢焙日常</span><span class="brand-caption">SLOW ROAST · GOOD DAYS</span></span>
+      </a>
+      <a class="button mobile-booking" href="#visit">立即訂位</a>
+      <button class="mobile-menu-toggle" type="button" aria-label="開啟導覽選單" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="nav-links">
+        <a href="#home">首頁</a>
+        <a href="#menu">咖啡與餐點</a>
+        <a href="#story">品牌故事</a>
+        <a href="#visit">門市資訊</a>
+        <a class="button" href="#visit">預約一個座位 <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="hero-copy">
+        <span class="eyebrow">A LITTLE PAUSE, A BETTER DAY</span>
+        <h1>留一點時間，<br>給一杯<em>好咖啡。</em></h1>
+        <p>嚴選咖啡豆，細心慢慢烘焙。無論是匆忙日常的一次停靠，或午後自在的久坐，都有一杯剛剛好的風味等你。</p>
+        <div class="hero-actions">
+          <a class="button" href="#menu">探索今日菜單 <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="#story">認識慢焙日常</a>
+        </div>
+        <div class="hero-note"><span class="note-dot"></span>每日新鮮手作・為每一段日常留白</div>
+      </div>
+      <div class="hero-art" role="img" aria-label="拉花拿鐵與咖啡館綠意的視覺主圖">
+        <img src="../a1c87e22b1c51ef472613b0c7ce8a837.jpg" alt="" fetchpriority="high">
+        <div class="hero-stamp"><strong>手作<br>好日常</strong><span>EST. 2024</span></div>
+        <span class="hero-index">COFFEE · SLOW LIVING</span>
+      </div>
+    </section>
+
+    <section class="qualities" aria-label="品牌特色">
+      <div class="quality-row wrap">
+        <div class="quality">
+          <span class="quality-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.6-7 11-7 11Z"/><path d="M12 8c-2 2-2 5 0 7"/></svg></span>
+          <div><strong>用心挑選好豆</strong><span>每一季都有新風味</span></div>
+        </div>
+        <div class="quality">
+          <span class="quality-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h13v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6ZM17 12h1a2.5 2.5 0 1 1 0 5h-2M7 6c-1-1 1-1.5 0-2.5M11 6c-1-1 1-1.5 0-2.5"/></svg></span>
+          <div><strong>每杯細心手作</strong><span>慢慢沖出恰好風味</span></div>
+        </div>
+        <div class="quality">
+          <span class="quality-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20c8 0 14-5 17-16-9 2-16 8-16 16Z"/><path d="M4 19c3-4 6-7 11-10"/></svg></span>
+          <div><strong>舒服自在空間</strong><span>一個人也能好好坐著</span></div>
+        </div>
+        <div class="quality">
+          <span class="quality-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 1-14.5 4.7L4 18M4 13a8 8 0 0 1 14.5-4.7L20 6"/><path d="M4 18v-4h4M20 6v4h-4"/></svg></span>
+          <div><strong>季節限定豆單</strong><span>總有值得期待的新味道</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="menu">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">A FEW HOUSE FAVORITES</span>
+          <h2>今天，想喝哪一杯？</h2>
+        </div>
+        <p>從醇厚拿鐵到清爽冷萃，挑一杯適合今天的風味。每日品項與供應狀況依門市為準。</p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="drink-art">
+            <span class="tag">人氣推薦</span>
+            <svg viewBox="0 0 160 180" aria-hidden="true">
+              <defs><linearGradient id="latte-glass" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fffaf0"/><stop offset=".45" stop-color="#e6d9c5"/><stop offset="1" stop-color="#c5a985"/></linearGradient><linearGradient id="latte-coffee" x1="0" x2="1"><stop stop-color="#8f4e2c"/><stop offset=".5" stop-color="#c37b42"/><stop offset="1" stop-color="#71402a"/></linearGradient></defs>
+              <ellipse cx="80" cy="158" rx="43" ry="8" fill="#604735" opacity=".14"/><path d="M39 53h82l-9 86a13 13 0 0 1-13 12H61a13 13 0 0 1-13-12l-9-86Z" fill="url(#latte-glass)" stroke="#bca98f" stroke-width="2"/><path d="M43 69h74l-7 67H52l-9-67Z" fill="url(#latte-coffee)"/><path d="M45 73c10-8 22 5 32-1 11-7 21 5 38 0l-2 14c-13 4-24-5-35 2-12 8-20-4-31 1l-2-16Z" fill="#f3ead8" opacity=".94"/><path d="M77 79c15-7 25 6 13 12-10 5 3 10 14 3-4 15-27 14-32 4-4-8 15-9 5-19Z" fill="#fff5e5" opacity=".9"/><path d="M61 49c5-10 1-14 8-20M82 48c5-10 1-14 8-20M101 49c5-10 1-14 8-20" stroke="#fffaf0" stroke-width="4" stroke-linecap="round" opacity=".7"/><path d="M49 148h61" stroke="#fffaf0" stroke-width="2" opacity=".6"/>
+            </svg>
+          </div>
+          <div class="menu-info"><div><h3>焦糖海鹽拿鐵</h3><p>醇厚濃縮、柔順牛奶與一點鹹甜焦糖。</p></div><span class="price">NT$160</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art green-bg">
+            <span class="tag">當日手沖</span>
+            <svg viewBox="0 0 160 180" aria-hidden="true">
+              <defs><linearGradient id="pour-glass" x1="0" x2="1"><stop stop-color="#fffdf5"/><stop offset=".55" stop-color="#e7dfd1"/><stop offset="1" stop-color="#c6b7a0"/></linearGradient><linearGradient id="pour-coffee" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#98633d"/><stop offset="1" stop-color="#533726"/></linearGradient></defs>
+              <ellipse cx="81" cy="158" rx="43" ry="8" fill="#42533e" opacity=".15"/><path d="M46 63h70l-7 76a13 13 0 0 1-13 12H67a13 13 0 0 1-13-12l-8-76Z" fill="url(#pour-glass)" stroke="#b9ae9a" stroke-width="2"/><path d="M51 86h60l-6 52H57l-6-52Z" fill="url(#pour-coffee)"/><path d="M53 88c13-7 19 7 30 1 10-6 20 4 27-1" fill="none" stroke="#d7ae7a" stroke-width="4" stroke-linecap="round"/><path d="M79 27v33M68 43l11 17 12-17" fill="none" stroke="#9f815c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 51h39l-5 13H65l-5-13Z" fill="#e1d4c0" stroke="#b9ae9a" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="menu-info"><div><h3>花果香單品手沖</h3><p>明亮果香與淡淡花韻，今日豆單現場挑選。</p></div><span class="price">NT$180</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+        <article class="menu-card">
+          <div class="drink-art rose-bg">
+            <span class="tag">午後限定</span>
+            <svg viewBox="0 0 160 180" aria-hidden="true">
+              <defs><linearGradient id="cold-glass" x1="0" x2="1"><stop stop-color="#f8f4e9" stop-opacity=".85"/><stop offset=".5" stop-color="#ddd4c6" stop-opacity=".65"/><stop offset="1" stop-color="#fff" stop-opacity=".8"/></linearGradient><linearGradient id="cold-brew" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#895335"/><stop offset="1" stop-color="#39291f"/></linearGradient></defs>
+              <ellipse cx="81" cy="158" rx="42" ry="8" fill="#604735" opacity=".14"/><path d="M42 54h76l-8 88a13 13 0 0 1-13 12H63a13 13 0 0 1-13-12l-8-88Z" fill="url(#cold-glass)" stroke="#bba997" stroke-width="2"/><path d="M47 84h66l-5 56H53l-6-56Z" fill="url(#cold-brew)"/><path d="m60 72 17 16-9 13-16-17ZM91 68l18 11-9 15-18-11Z" fill="#e5ddcf" stroke="#fff5e5" stroke-width="2"/><path d="m96 37 15 44" stroke="#e6a457" stroke-width="5" stroke-linecap="round"/><path d="M53 121c17 6 35-6 54 0" fill="none" stroke="#bd8655" stroke-width="2" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="menu-info"><div><h3>柑橘慢萃冷咖啡</h3><p>低溫慢萃的柔和醇香，襯上清新柑橘尾韻。</p></div><span class="price">NT$150</span></div>
+          <a class="menu-link" href="#visit">看看菜單 <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h13M10 4l6 6-6 6"/></svg></a>
+        </article>
+      </div>
+      <p class="menu-footnote">* 圖片為風格示意，實際飲品依門市供應為準。</p>
+    </section>
+
+    <section class="story wrap" id="story">
+      <div class="story-panel">
+        <div class="story-copy">
+          <span class="eyebrow">OUR LITTLE COFFEE CORNER</span>
+          <h2>不只是咖啡，<br>也是日常裡的小小停靠。</h2>
+          <p>慢焙日常從一個簡單的念頭開始：讓好咖啡，成為每一天都能享有的小事。細心選豆、耐心烘焙，也為你留一個可以自在呼吸的角落。</p>
+          <a class="button" href="#visit">走進我們的故事 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="story-image" role="img" aria-label="咖啡與日常生活風格影像">
+          <img src="../a1c87e22b1c51ef472613b0c7ce8a837.jpg" alt="" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="visit-grid wrap">
+        <div class="visit-copy">
+          <span class="eyebrow">COME ON IN, STAY A WHILE</span>
+          <h2>為你留一個<br>舒服的位置。</h2>
+          <p>想來喝杯咖啡、和朋友好好聊聊？先看看門市資訊，也可以使用右側表單體驗訂位流程。</p>
+          <div class="visit-details">
+            <div class="visit-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>台北市大安區和平東路一段 88 號<br>近捷運古亭站，步行約 6 分鐘</span></div>
+            <div class="visit-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>週一至週五 09:00–18:00<br>週六、週日 10:00–19:00</span></div>
+          </div>
+        </div>
+        <form class="booking" id="booking-form">
+          <h3>預約一段咖啡時光</h3>
+          <p>選擇想來的日期與時段，我們會為你保留座位。</p>
+          <div class="form-grid">
+            <div class="form-field"><label for="guest-name">怎麼稱呼你</label><input id="guest-name" name="name" autocomplete="name" placeholder="你的名字" required></div>
+            <div class="form-field"><label for="guest-count">同行人數</label><select id="guest-count" name="guests"><option>1 位</option><option>2 位</option><option>3 位</option><option>4 位</option><option>5 位以上</option></select></div>
+            <div class="form-field"><label for="visit-date">到訪日期</label><input id="visit-date" name="date" type="date" required></div>
+            <div class="form-field"><label for="visit-time">偏好時段</label><select id="visit-time" name="time"><option>09:00–11:00</option><option>11:00–13:00</option><option>13:00–15:00</option><option>15:00–17:00</option><option>17:00–19:00</option></select></div>
+          </div>
+          <button class="button" type="submit">體驗預約流程 <span aria-hidden="true">↗</span></button>
+          <p class="form-status" id="form-status" aria-live="polite">展示用表單，不會送出或保存個人資料。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row wrap">
+      <a class="brand" href="#home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9h12v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 6c-1-1 1-1.5 0-2.5M12 6c-1-1 1-1.5 0-2.5"/></svg></span>
+        <span><span class="brand-name">慢焙日常</span><span class="brand-caption">SLOW ROAST · GOOD DAYS</span></span>
+      </a>
+      <div class="footer-links"><a href="#menu">咖啡與餐點</a><a href="#story">品牌故事</a><a href="#visit">門市資訊</a></div>
+      <span class="footer-copy">© 2026 慢焙日常・視覺提案示意</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".mobile-menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "開啟導覽選單" : "關閉導覽選單");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "開啟導覽選單");
+      }
+    });
+    const visitDate = document.querySelector("#visit-date");
+    const today = new Date();
+    visitDate.min = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    document.querySelector("#booking-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.querySelector("#form-status").textContent = "這是視覺示意：目前尚未連接實際訂位服務。";
+    });
+  </script>
+</body>
+</html>
